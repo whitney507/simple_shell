@@ -14,13 +14,13 @@ if (buff[j] == '|' && buff[j + 1] == '|')
 {
 buff[j] = 0;
 j++;
-infos->cmd_buff_type = CMD_OR;
+infos->cmd_buf_type = CMD_OR;
 }
 else if (buff[j] == '&' && buff[j + 1] == '&')
 {
 buff[j] = 0;
 j++;
-infos->cmd_buff_type = CMD_AND;
+infos->cmd_buf_type = CMD_AND;
 }
 else if (buff[j] == ';')
 {
@@ -45,7 +45,7 @@ return (1);
 void check_chain(info_t *infos, char *buff, size_t *po, size_t id, size_t leng)
 {
 size_t j = *po;
-if (infos->cmd_buff_type == CMD_AND)
+if (infos->cmd_buf_type == CMD_AND)
 {
 if (infos->status)
 {
@@ -53,7 +53,7 @@ buff[id] = 0;
 j = leng;
 }
 }
-if (infos->cmd_buff_type == CMD_OR)
+if (infos->cmd_buf_type == CMD_OR)
 {
 if (!infos->status)
 {

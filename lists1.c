@@ -38,7 +38,7 @@ str = malloc(_strlen(nodes->str) + 1);
 if (!str)
 {
 for (v = 0; v < i; v++)
-free(strt[j]);
+free(strt[v]);
 free(strt);
 return (NULL);
 }

@@ -57,7 +57,7 @@ if (stri == NULL || stri[0] == 0)
 return (NULL);
 for (i = 0; stri[i] != '\0'; i++)
 if ((stri[i] != dc && stri[i + 1] == dc) ||
-(stri[i] != dc && !stri[i + 1]) || stri[i + 1] == d)
+(stri[i] != dc && !stri[i + 1]) || stri[i + 1] == dc)
 numword++;
 if (numword == 0)
 return (NULL);

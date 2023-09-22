@@ -59,7 +59,7 @@ while (1)
 {
 if (!pathstri[z] || pathstri[z] == ':')
 {
-path = dup_chars(pathstri, curr_pos, i);
+path = dup_chars(pathstri, curr_pos, z);
 if (!*path)
 _strcat(path, cmd);
 else

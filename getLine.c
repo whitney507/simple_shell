@@ -18,6 +18,46 @@ if (t >= 0)
 return (t);
 }
 /**
+ * input_buf - chained buffers commands
+ * @infos: param struct
+ * @buff: address of the buffer
+ * @len: address len var
+ *
+ * Return: bytes read
+ */
+ssize_t input_buf(info_t *infos, char **buff, size_t *len)
+{
+ssize_t t = 0;
+size_t len_p = 0;
+if (!*len)
+{
+free(*buff);
+*buff = NULL;
+signal(SIGINT, sigintHandler);
+#if USE_GETLINE
+t = getline(buff, &len_p, stdin);
+#else
+t = _getline(infos, buff, &len_p);
+#endif
+if (t > 0)
+{
+if ((*buff)[t - 1] == '\n')
+{
+(*buff)[t - 1] = '\0';
+t--;
+}
+infos->linecount_flag = 1;
+remove_comments(*buff);
+build_history_list(infos, *buff, infos->histcount++);
+{
+*len = t;
+infos->cmd_buf = buff;
+}
+}
+}
+return (t);
+}
+/**
  * get_input - get line - newline
  * @infos: param struct
  *
@@ -95,46 +135,6 @@ if (lengt)
 *lengt = st;
 *ptri = p;
 return (st);
-}
-/**
- * input_buf - chained buffers commands
- * @infos: param struct
- * @buff: address of the buffer
- * @len: address len var
- *
- * Return: bytes read
- */
-ssize_t input_buf(info_t *infos, char **buff, size_t *len)
-{
-ssize_t t = 0;
-size_t len_p = 0;
-if (!*len)
-{
-free(*buff);
-*buff = NULL;
-signal(SIGINT, sigintHandler);
-#if USE_GETLINE
-t = getline(buff, &len_p, stdin);
-#else
-t = _getline(infos, buff, &len_p);
-#endif
-if (t > 0)
-{
-if ((*buff)[t - 1] == '\n')
-{
-(*buff)[t - 1] = '\0';
-t--;
-}
-infos->linecount_flag = 1;
-remove_comments(*buff);
-build_history_list(infos, *buff, infos->histcount++);
-{
-*len = t;
-infos->cmd_buff = buff;
-}
-}
-}
-return (t);
 }
 /**
  * sigintHandler - it blocks ctrl-C

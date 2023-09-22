@@ -35,7 +35,7 @@ return (results);
 int print_d(int inputs, int fd)
 {
 int (*__putchar)(char) = _putchar;
-counte = 0, int z;
+int z, counte = 0;
 unsigned int _ads_, currents;
 if (fd == STDERR_FILENO)
 __putchar = _eputchar;
@@ -120,7 +120,7 @@ ptdr = &buffe[49];
 do {
 *--ptdr = array[b % bases];
 b /= bases;
-} while (n != 0);
+} while (b != 0);
 if (sign)
 *--ptdr = sign;
 return (ptdr);

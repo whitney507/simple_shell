@@ -58,7 +58,7 @@ int populate_env_list(info_t *info)
 {
 list_t *node = NULL;
 size_t z;
-for (z = 0; envzron[z]; z++)
+for (z = 0; environ[z]; z++)
 add_node_end(&node, environ[z], 0);
 info->env = node;
 return (0);

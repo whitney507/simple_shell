@@ -38,7 +38,7 @@ if (str[z] >= '0' && str[z] <= '9')
 {
 flags = 1;
 result *= 10;
-result += (s[i] - '0');
+result += (str[z] - '0');
 }
 else if (flags == 1)
 flags = 2;
